@@ -84,10 +84,10 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.MyViewHold
             @Override
             public void onClick(View v) {
                 if (!isFav) {
-                    holder.favorites.setImageResource(R.drawable.favorite_24px);
+                    holder.favorites.setImageResource(R.drawable.like_outline);
                     isFav = true;
                 } else {
-                    holder.favorites.setImageResource(R.drawable.outline_favorite_24);
+                    holder.favorites.setImageResource(R.drawable.like_fill);
                     isFav = false;
                 }
             }
@@ -112,7 +112,7 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.MyViewHold
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            videoView = itemView.findViewById(R.id.videoView);
+            videoView = itemView.findViewById(R.id.playerView);
             videoProgressBar = itemView.findViewById(R.id.videoProgressBar);
             textVideoTitle = itemView.findViewById(R.id.textVideoTitle);
             textVideoDescription = itemView.findViewById(R.id.textVideoDescription);

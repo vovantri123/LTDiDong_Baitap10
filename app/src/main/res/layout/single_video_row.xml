@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black">
-
-    <VideoView
-        android:id="@+id/videoView"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Video View full screen -->
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="1.0"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:use_controller="false"
+        app:resize_mode="zoom"/>
 
+    <!-- Progress Bar in the center -->
     <ProgressBar
         android:id="@+id/videoProgressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="50dp"
-        android:layout_height="50dp"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Bottom bar: title and description -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.888"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintHorizontal_bias="1.0">
 
+        <!-- Left content: title + description -->
         <LinearLayout
             android:layout_weight="1"
             android:orientation="vertical"
@@ -47,8 +49,31 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/imPerson"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="18dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_person_pin" />
+
+                <TextView
+                    android:id="@+id/tvEmailVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="test@gmail.com"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/textVideoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingStart="9dp"
                 android:paddingTop="5dp"
                 android:paddingEnd="5dp"
@@ -58,9 +83,7 @@
                 android:textStyle="bold"
                 android:shadowDx="0"
                 android:shadowDy="0"
-                android:shadowRadius="15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:shadowRadius="15" />
 
             <TextView
                 android:id="@+id/textVideoDescription"
@@ -69,39 +92,60 @@
                 android:paddingStart="5dp"
                 android:paddingTop="5dp"
                 android:paddingEnd="5dp"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="15"
                 android:text="Video Shorts"
                 android:textColor="#fff"
-                android:textSize="16sp"/>
-
+                android:textSize="16sp"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="15" />
         </LinearLayout>
 
+        <!-- Right content: user icon -->
         <LinearLayout
             android:orientation="vertical"
-            android:layout_gravity="end"
-            android:gravity="end"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
 
-            <ImageView
-                android:id="@+id/imPerson"
-                android:src="@drawable/account_circle_24px"
-                android:layout_gravity="start"
-                android:padding="2dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"/>
 
             <ImageView
                 android:id="@+id/favorites"
-                android:src="@drawable/favorite_24px"
+                android:src="@drawable/like_outline"
                 android:layout_gravity="end"
                 android:padding="2dp"
+                app:tint="#FFF"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="18dp"
                 android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/txtLikeCount"
+                android:textColor="#FFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="10000" />
+
+            <ImageView
+                android:id="@+id/dislike"
+                android:src="@drawable/dislike_outline"
+                android:layout_gravity="end"
+                android:padding="2dp"
+                android:layout_marginTop="5dp"
+                app:tint="#CEC9C9"
+                android:layout_marginEnd="18dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/txtDislikeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:textColor="#FFF"
+                android:text="10000" />
 
             <ImageView
                 android:id="@+id/imShare"
@@ -110,8 +154,9 @@
                 android:padding="6dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="18dp"
+                app:tint="#FFF"
                 android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp" />
 
             <ImageView
                 android:id="@+id/imMore"
@@ -119,12 +164,12 @@
                 android:layout_gravity="end"
                 android:padding="2dp"
                 android:layout_marginTop="5dp"
+                app:tint="#FFF"
                 android:layout_marginEnd="18dp"
                 android:layout_width="40dp"
-                android:layout_height="40dp"/>
-
+                android:layout_height="40dp" />
         </LinearLayout>
-
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

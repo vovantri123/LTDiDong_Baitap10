@@ -6,6 +6,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <!-- Quyền đọc bộ nhớ cho Android 12 trở xuống -->
+    <!-- maxSdkVersion="32" nghĩa là quyền này chỉ áp dụng cho API 32 (Android 12L) trở xuống -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+
+    <!-- Quyền đọc bộ nhớ cho Ảnh/Video trên Android 13+ -->
+    <!-- Không cần android:maxSdkVersion vì chúng chỉ dành cho API 33+ -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+
+
     <application
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
@@ -20,12 +30,20 @@
 
         <!--
         .firebase.vidu01.MainActivityFirebase
+
         .firebase.vidu02.MainActivityFirebaseVidu02
+        .webview.WebviewActivity
+
+        -->
+
+        <!--
+
+        .firebase.vidu01.LoginActivity
 
         -->
 
         <activity
-            android:name=".webview.WebviewActivity"
+            android:name=".firebase.vidu01.LoginAndSignupActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +51,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".firebase.vidu01.MainActivityFirebase" />
+        <activity android:name=".firebase.vidu01.UploadActivity" />
+        <activity android:name=".firebase.vidu01.ProfileActivity" />
     </application>
 
 </manifest>
